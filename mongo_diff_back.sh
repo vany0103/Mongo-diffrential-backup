@@ -13,6 +13,6 @@ collection_list="devicerawdatafifteenminutes devicerawdatafiveminutes devicerawd
 out_prefix="/root/mongo_diff_back"
 for collection in $collection_list; do
         echo $collection
-mongodump --host "sgridsreplica/10.7.10.27:8030,10.7.10.43:8030,10.7.10.8:8030" --username="jShMGpYf" --password="bzOQDpoYs4T24ISdEFqeRORjHFqWZ7XO" --authenticationDatabase="admin" --db "$db_name" --collection $collection  -q '{"planttimestamp" : {"$gte" : {"$numberDouble" :"'$start_timestamp'"}},"timestamp" :{"$lte" : {"$numberDouble" : "'$stop_timestamp'"}}}' --gzip --archive  | mongorestore --host  "sgridsreplica/10.7.10.33:8030,10.7.10.19:8030,10.7.10.6:8030" --username="NayOrqFX" --password="PgBbXfddKpjtxXYWfNfPHInleZbaUBmK" --authenticationDatabase="admin" --nsFrom "$db_name.*" --nsTo "$host_db_name.*" --drop --archive --gzip
+mongodump --host "sgridsreplica/10.7.10.27:8030,10.7.10.43:8030,10.7.10.8:8030" --username="root" --password="password" --authenticationDatabase="admin" --db "$db_name" --collection $collection  -q '{"planttimestamp" : {"$gte" : {"$numberDouble" :"'$start_timestamp'"}},"timestamp" :{"$lte" : {"$numberDouble" : "'$stop_timestamp'"}}}' --gzip --archive  | mongorestore --host  "sgridsreplica/10.7.10.33:8030,10.7.10.19:8030,10.7.10.6:8030" --username="NayOrqFX" --password="PgBbXfddKpjtxXYWfNfPHInleZbaUBmK" --authenticationDatabase="admin" --nsFrom "$db_name.*" --nsTo "$host_db_name.*" --drop --archive --gzip
 
 done
